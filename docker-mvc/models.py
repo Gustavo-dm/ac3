@@ -8,7 +8,7 @@ class Produtos(db.Model):
     categoria = db.Column(db.String(100), nullable=False)
     preco = db.Column(db.String(100), nullable=False)
 
-    def __init__(self, name, email, endereco):
+    def __init__(self, produto, categoria, preco):
         self.produto = produto
         self.categoria = categoria
         self.preco = preco
