@@ -19,7 +19,7 @@ def post_produto():
     categoria = request.form.get('categoria')
     preco = request.form.get('preco')
     if produto and categoria and preco:
-        produtos = produtos(produto, categoria, preco)
+        produtos = Produtos(produto, categoria, preco)
         db.session.add(produtos)
         db.session.commit()
         db.session.flush()
@@ -29,7 +29,7 @@ def post_produto():
 
 @app.route('/lista/produto/<int:nid>', methods=['GET'])
 def show_produto(nid):
-    produtos = produtos.query.filter_by(id=nid).all()
+    produtos = Produtos.query.filter_by(id=nid).all()
     db.session.commit()
     return render_template('show_produtos.html', produtos=produtos)
 
