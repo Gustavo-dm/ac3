@@ -11,27 +11,27 @@ from models import *
 
 @app.route('/')
 def inicio():
-    return render_template('produto.html')
+    return render_template('aluno.html')
 
-@app.route('/produto', methods=['POST'])
-def post_produto():
-    produto = request.form.get('produto')
-    categoria = request.form.get('categoria')
-    preco = request.form.get('preco')
-    if produto and categoria and preco:
-        produtos = Produtos(produto, categoria, preco)
-        db.session.add(produtos)
+@app.route('/aluno', methods=['POST'])
+def post_aluno():
+    aluno = request.form.get('aluno')
+    email = request.form.get('email')
+    endereco = request.form.get('end')
+    if aluno and email and endereco:
+        alunos = Alunos(aluno, email, endereco)
+        db.session.add(alunos)
         db.session.commit()
         db.session.flush()
-        url = f"/lista/produto/{produtos.id}"
+        url = f"/lista/aluno/{alunos.id}"
         return redirect(url, code=302)
-    return render_template('show_produtos.html')
+    return render_template('show_alunos.html')
 
-@app.route('/lista/produto/<int:nid>', methods=['GET'])
-def show_produto(nid):
-    produtos = Produtos.query.filter_by(id=nid).all()
+@app.route('/lista/aluno/<int:nid>', methods=['GET'])
+def show_aluno(nid):
+    alunos = Alunos.query.filter_by(id=nid).all()
     db.session.commit()
-    return render_template('show_produtos.html', produtos=produtos)
+    return render_template('show_alunos.html', alunos=alunos)
 
 
 if __name__ == "__main__":
